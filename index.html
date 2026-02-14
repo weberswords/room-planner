@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Layout Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Top Toolbar -->
+    <header id="toolbar">
+      <div class="toolbar-group">
+        <h1>Room Layout Planner</h1>
+      </div>
+      <div class="toolbar-group toolbar-actions">
+        <label class="toggle-label">
+          <input type="checkbox" id="gridSnap" checked>
+          <span>Grid Snap</span>
+        </label>
+        <label class="toggle-label">
+          <input type="checkbox" id="showMeasurements">
+          <span>Measurements</span>
+        </label>
+        <button id="zoomIn" title="Zoom In">+</button>
+        <button id="zoomOut" title="Zoom Out">&minus;</button>
+        <button id="zoomFit" title="Fit to View">Fit</button>
+        <span id="zoomLevel">100%</span>
+      </div>
+    </header>
+
+    <div id="main">
+      <!-- Left Sidebar -->
+      <aside id="sidebar">
+        <!-- Room Config -->
+        <section class="panel" id="roomPanel">
+          <h2>Room</h2>
+          <div class="panel-content">
+            <div class="input-row">
+              <label>Room Name</label>
+              <input type="text" id="roomName" value="My Room" placeholder="Room name">
+            </div>
+            <div class="btn-row">
+              <button id="importRoomCSV" class="btn-secondary">Import Room CSV</button>
+              <button id="importFurnitureCSV" class="btn-secondary">Import Furniture CSV</button>
+            </div>
+            <div class="btn-row">
+              <button id="loadSample" class="btn-primary">Load Sample Room</button>
+            </div>
+            <input type="file" id="roomFileInput" accept=".csv" style="display:none">
+            <input type="file" id="furnitureFileInput" accept=".csv" style="display:none">
+          </div>
+        </section>
+
+        <!-- Walls Editor -->
+        <section class="panel" id="wallsPanel">
+          <h2>Walls &amp; Openings</h2>
+          <div class="panel-content">
+            <div id="wallsList"></div>
+            <button id="addWall" class="btn-secondary btn-sm">+ Add Wall</button>
+          </div>
+        </section>
+
+        <!-- Furniture Palette -->
+        <section class="panel" id="furniturePanel">
+          <h2>Furniture</h2>
+          <div class="panel-content">
+            <div id="furnitureList"></div>
+            <button id="addFurniture" class="btn-secondary btn-sm">+ Add Item</button>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Canvas Area -->
+      <div id="canvasContainer">
+        <canvas id="roomCanvas"></canvas>
+        <!-- Floating info for selected item -->
+        <div id="selectionInfo" class="hidden">
+          <span id="selectionName"></span>
+          <span id="selectionSize"></span>
+          <div class="selection-actions">
+            <button id="rotateCW" title="Rotate 45° clockwise">&#x21BB; 45°</button>
+            <button id="rotateCCW" title="Rotate 45° counter-clockwise">&#x21BA; 45°</button>
+            <button id="deleteItem" title="Remove from room">&#x2715; Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Status Bar -->
+    <footer id="statusBar">
+      <span id="statusMsg">Load a room to begin</span>
+      <div class="status-right">
+        <button id="exportImage" class="btn-secondary btn-sm">Export Image</button>
+        <button id="exportCSV" class="btn-secondary btn-sm">Export CSV</button>
+        <button id="saveLayout" class="btn-secondary btn-sm">Save Layout</button>
+        <button id="loadLayout" class="btn-secondary btn-sm">Load Layout</button>
+        <input type="file" id="layoutFileInput" accept=".json" style="display:none">
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal for manual entry -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Title</h3>
+        <button id="modalClose" class="btn-icon">&times;</button>
+      </div>
+      <div id="modalBody"></div>
+      <div class="modal-footer">
+        <button id="modalCancel" class="btn-secondary">Cancel</button>
+        <button id="modalOk" class="btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
