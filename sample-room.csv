@@ -1,0 +1,5 @@
+wall_name,length_inches,opening_type,opening_start_inches,opening_width_inches
+north,180,window,48,60
+east,144,none,0,0
+south,180,door,72,36
+west,144,closet,24,48
